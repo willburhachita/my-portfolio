@@ -222,7 +222,6 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
                     delay: i * 0.2,
                     ease: "easeInOut"
                   }}
-                }}
                 />
               ))}
             </div>
