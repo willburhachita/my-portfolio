@@ -15,8 +15,7 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
       setTimeout(() => setStep(1), 2000),   // "Hi, you're at the right place" → "I'm Wilbur"
       setTimeout(() => setStep(2), 4000),   // "I'm Wilbur" → wink animation
       setTimeout(() => setStep(3), 6500),   // wink → "Here's my world"
-      setTimeout(() => setStep(4), 8500),   // show picture
-      setTimeout(() => setStep(5), 10000),  // finish intro
+      setTimeout(() => setStep(4), 8500),   // finish intro
     ]
     return () => timers.forEach(clearTimeout)
   }, [])
@@ -75,9 +74,9 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden"
       initial={{ opacity: 1 }}
-      animate={step === 5 ? { opacity: 0 } : { opacity: 1 }}
+      animate={step === 4 ? { opacity: 0 } : { opacity: 1 }}
       transition={{ duration: 1.5, ease: "easeInOut" }}
-      onAnimationComplete={() => step === 5 && onFinish()}
+      onAnimationComplete={() => step === 4 && onFinish()}
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
@@ -152,18 +151,6 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
                 <div className="text-yellow-400">
                   <EyeWink size={80} />
                 </div>
-                <motion.div
-                  className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 1.2
-                  }}
-                >
-                  😉
-                </motion.div>
               </motion.div>
             )}
             
@@ -185,8 +172,8 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
           </AnimatePresence>
         </div>
 
-        {/* Picture Animation Section */}
-        {step >= 4 && (
+        {/* Picture Animation Section - Shows from step 1 onwards */}
+        {step >= 1 && (
           <motion.div
             variants={pictureVariants}
             initial="initial"
@@ -235,6 +222,7 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
                     delay: i * 0.2,
                     ease: "easeInOut"
                   }}
+                }}
                 />
               ))}
             </div>
