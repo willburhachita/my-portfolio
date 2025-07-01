@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Eye, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
+import { EyeWink } from './EyeWink'
 
 interface HeroIntroProps {
   onFinish: () => void
@@ -13,9 +14,9 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
     const timers = [
       setTimeout(() => setStep(1), 2000),   // "Hi, you're at the right place" → "I'm Wilbur"
       setTimeout(() => setStep(2), 4000),   // "I'm Wilbur" → wink animation
-      setTimeout(() => setStep(3), 5500),   // wink → "Here's my world"
-      setTimeout(() => setStep(4), 7500),   // show picture
-      setTimeout(() => setStep(5), 9000),   // finish intro
+      setTimeout(() => setStep(3), 6500),   // wink → "Here's my world"
+      setTimeout(() => setStep(4), 8500),   // show picture
+      setTimeout(() => setStep(5), 10000),  // finish intro
     ]
     return () => timers.forEach(clearTimeout)
   }, [])
@@ -45,18 +46,6 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
       transition: {
         duration: 0.6,
         ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  }
-
-  const winkVariants = {
-    initial: { scale: 0, rotate: -180 },
-    animate: { 
-      scale: [0, 1.2, 1], 
-      rotate: [0, 10, -10, 0],
-      transition: {
-        duration: 1.5,
-        ease: "easeOut"
       }
     }
   }
@@ -154,42 +143,23 @@ export function HeroIntro({ onFinish }: HeroIntroProps) {
             {step === 2 && (
               <motion.div
                 key="wink"
-                className="flex items-center justify-center md:justify-start gap-4"
+                className="flex items-center justify-center md:justify-start gap-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
               >
+                <div className="text-yellow-400">
+                  <EyeWink size={80} />
+                </div>
                 <motion.div
-                  variants={winkVariants}
-                  initial="initial"
-                  animate="animate"
-                  className="relative"
-                >
-                  <Eye className="w-16 h-16 text-yellow-400" />
-                  <motion.div
-                    className="absolute inset-0 flex items-center justify-center"
-                    animate={{
-                      scaleY: [1, 0.1, 1],
-                    }}
-                    transition={{
-                      duration: 0.3,
-                      delay: 0.5,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <div className="w-12 h-1 bg-yellow-400 rounded-full" />
-                  </motion.div>
-                </motion.div>
-                <motion.div
-                  className="text-6xl"
+                  className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent"
                   animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 10, -10, 0]
+                    scale: [1, 1.1, 1],
                   }}
                   transition={{
-                    duration: 1,
-                    delay: 0.8
+                    duration: 0.8,
+                    delay: 1.2
                   }}
                 >
                   😉
